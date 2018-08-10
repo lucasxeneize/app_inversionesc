@@ -5,4 +5,8 @@ http://www.cmfchile.cl/institucional/inc/valores_cuota/valor_serie.php?v1=C1KB5&
 FICHA ADMINISTRADORA
 http://www.cmfchile.cl/institucional/mercados/entidad.php?auth=&send=&mercado=V&rut=96767630&grupo=&tipoentidad=RACRT&vig=VI&row=AAAwy2ACTAAABzXAAY&control=svs&pestania=1
 
+portal
+http://datos-lucasxeneize12795941.codeanyapp.com/vistas/valores_cuotas.php
+
+
 
