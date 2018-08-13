@@ -114,12 +114,23 @@
 
 			</li>
 
-		<li>
+			<li>
 
 				<a href="administradoras">
 
 					<i class="fa fa-user"></i>
 					<span>Administradoras</span>
+
+				</a>
+
+			</li>
+
+			<li>
+
+				<a href="instrumentos">
+
+					<i class="fa fa-user"></i>
+					<span>Instrumentos</span>
 
 				</a>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2018 a las 18:01:21
+-- Tiempo de generación: 13-08-2018 a las 22:06:12
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -25,45 +25,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `administradoras`
+-- Estructura de tabla para la tabla `instrumentos`
 --
 
-CREATE TABLE `administradoras` (
+CREATE TABLE `instrumentos` (
   `id` int(11) NOT NULL,
-  `rut` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `razon_social` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre_fantasia` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `sitio_web` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombre` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
+  `id_administradora` int(11) NOT NULL,
+  `serie` varchar(15) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `administradoras`
+-- Volcado de datos para la tabla `instrumentos`
 --
 
-INSERT INTO `administradoras` (`id`, `rut`, `razon_social`, `nombre_fantasia`, `sitio_web`) VALUES
-(32, '2-7', 'RAZOS SOCIAL', 'FANTASIA', ''),
-(47, '2-8', 'RAZOS SOCIAL8', 'FANTASIA8', 'www.888.cl');
+INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`) VALUES
+(3, 'A1', 0, 'A1'),
+(4, 'C1', 0, 'C1'),
+(5, 'D', 4, 'D');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `administradoras`
+-- Indices de la tabla `instrumentos`
 --
-ALTER TABLE `administradoras`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `rut` (`rut`);
+ALTER TABLE `instrumentos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `administradoras`
+-- AUTO_INCREMENT de la tabla `instrumentos`
 --
-ALTER TABLE `administradoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+ALTER TABLE `instrumentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
