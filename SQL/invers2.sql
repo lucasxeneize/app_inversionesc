@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2018 a las 22:06:12
+-- Tiempo de generación: 17-08-2018 a las 21:10:57
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -25,6 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `administradoras`
+--
+
+CREATE TABLE `administradoras` (
+  `id` int(11) NOT NULL,
+  `rut` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `razon_social` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_fantasia` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `sitio_web` text COLLATE utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `administradoras`
+--
+
+INSERT INTO `administradoras` (`id`, `rut`, `razon_social`, `nombre_fantasia`, `sitio_web`) VALUES
+(32, '96634320-6', 'SCOTIA ADMINISTRADORA GENERAL DE FONDOS CHILE S.A.', 'SCOTIA', 'https://www.scotiabankchile.cl/Personas/Inversiones'),
+(47, '96667040-1', 'SANTANDER ASSET MANAGEMENT S.A. ADMINISTRADORA GENERAL DE FONDOS', 'SANTANDER ASSET', 'https://www.santander.cl/inversiones/index.asp');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `instrumentos`
 --
 
@@ -40,29 +62,54 @@ CREATE TABLE `instrumentos` (
 --
 
 INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`) VALUES
-(3, 'A1', 0, 'A1'),
-(4, 'C1', 0, 'C1'),
-(5, 'D', 4, 'D');
+(6, 'Prioridad Serie C', 32, 'C'),
+(7, 'Accionario Nacionales', 32, 'A'),
+(8, 'SANTANDER A', 47, 'A'),
+(9, 'ACCIONES MID CAP CHILE', 47, 'UNIVERSAL');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
+-- Indices de la tabla `administradoras`
+--
+ALTER TABLE `administradoras`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `rut` (`rut`);
+
+--
 -- Indices de la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `instrumentos_administradoras` (`id_administradora`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
+-- AUTO_INCREMENT de la tabla `administradoras`
+--
+ALTER TABLE `administradoras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
 -- AUTO_INCREMENT de la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `instrumentos`
+--
+ALTER TABLE `instrumentos`
+  ADD CONSTRAINT `instrumentos_administradoras` FOREIGN KEY (`id_administradora`) REFERENCES `administradoras` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
