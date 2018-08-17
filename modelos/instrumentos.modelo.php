@@ -14,9 +14,9 @@ class ModeloInstrumentos{
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_administradora, nombre, serie) VALUES (:id_administradora, :nombre, :serie)");
 
-		echo '<script>console.log("mdlIngresarInstrumento  $datos_id_administradora='.$datos["id_administradora"].'");</script>';
+		/*echo '<script>console.log("mdlIngresarInstrumento  $datos_id_administradora='.$datos["id_administradora"].'");</script>';
 		echo '<script>console.log("mdlIngresarInstrumento  Nombre='. $datos["nombre"].'");</script>';
-		echo '<script>console.log("mdlIngresarInstrumento  Serie='. $datos["serie"].'");</script>';
+		echo '<script>console.log("mdlIngresarInstrumento  Serie='. $datos["serie"].'");</script>';*/
 
 		$stmt->bindParam(":id_administradora", $datos["id_administradora"], PDO::PARAM_INT);
 		$stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
@@ -46,30 +46,8 @@ class ModeloInstrumentos{
 
 	static public function mdlMostrarInstrumentos($tabla, $item, $valor){
 
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-
-			$stmt -> execute();
-
-			return $stmt -> fetch();
-
-		}else{
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-
-			$stmt -> execute();
-
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
-
+		return Conexion::query($tabla, $item, $valor);
+		
 	}
 
 	/*=============================================

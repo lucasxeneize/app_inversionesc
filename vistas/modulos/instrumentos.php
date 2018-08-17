@@ -144,7 +144,7 @@ MODAL AGREGAR
             </div>
 
             <!-- ENTRADA ADMINISTRADORA -->
-            <div class="form-group">
+            <!--div class="form-group">
               
               <div class="input-group">
               
@@ -152,8 +152,50 @@ MODAL AGREGAR
               
                 </div>
               
-              </div>
+              </div-->
               
+          
+            <!-- ENTRADA PARA SELECCIONAR ADMINISTRADORA -->
+            <div class="form-group">
+            
+            <div class="input-group">
+            
+              <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+
+              <select class="form-control input-lg" name="nAdministradora">
+                  
+                  <option value="">Selecionar administradora</option>
+
+                 <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $administradoras = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+
+
+                  foreach ($administradoras as $key => $value) {
+                   
+                    echo '<option value="'.$value["id"].'">'.$value["razon_social"].'</option>';
+
+                  }
+
+                ?>
+
+                  <!--option value="Administrador">CUPRUM</option>
+
+                  <option value="Especial">SCOTIA</option>
+
+                  <option value="Vendedor">BANCHILE</option-->
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+
               <!-- ENTRADA SERIE -->
             <div class="form-group">
               
@@ -248,7 +290,7 @@ MODAL EDITAR
             </div>
 
             <!-- ENTRADA ADMINISTRADORA -->
-            <div class="form-group">
+            <!--div class="form-group">
               
               <div class="input-group">
               
@@ -258,8 +300,46 @@ MODAL EDITAR
               
                 </div>
               
-              </div>
+              </div-->
               
+             <!-- ENTRADA PARA SELECCIONAR ADMINISTRADORA -->
+            <div class="form-group">
+            
+            <div class="input-group">
+            
+              <span class="input-group-addon"><i class="fa fa-users"></i></span> 
+
+              <select class="form-control input-lg" name="nAdministradora">
+                  
+                  <option value="">Selecionar administradora</option>
+
+                 <?php
+
+                  $item = null;
+                  $valor = null;
+
+                  $administradoras = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+
+
+                  foreach ($administradoras as $key => $value) {
+                    echo '<option value="'.$value["id"].'">'.$value["razon_social"].'</option>';
+                  }
+
+                ?>
+
+                  <!--option value="Administrador">CUPRUM</option>
+
+                  <option value="Especial">SCOTIA</option>
+
+                  <option value="Vendedor">BANCHILE</option-->
+
+                </select>
+
+              </div>
+
+            </div>
+
+
               <!-- ENTRADA SERIE -->
             <div class="form-group">
               

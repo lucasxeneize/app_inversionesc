@@ -43,6 +43,9 @@
            <th style="width:10px">#</th>
            <th>Rut</th>
            <th>Administradora</th>
+           <th>Nombre Fantasia</th>
+          <!-- <th>Sitio Web</th>-->
+
            <th>Acciones</th>
 
          </tr> 
@@ -68,6 +71,11 @@
                     <td class="text-uppercase">'.$value["rut"].'</td>
 
                     <td class="text-uppercase">'.$value["razon_social"].'</td>
+
+                    <td class="text-uppercase">'.$value["nombre_fantasia"].'</td>
+
+                    
+
 
                     <td>
 
@@ -153,6 +161,37 @@ MODAL AGREGAR ADMINISTRADORA
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
                 <input type="text" class="form-control input-lg" name="nuevaRazonSocial" placeholder="Ingresar razón social" required>
+
+              </div>
+
+            </div>
+
+
+
+          <!-- ENTRADA PARA NOMBRE FANTASIA -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nNombreFantasia" placeholder="Ingresar nombre fantasia" required>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA SITIO WEB -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="nSitioWeb" placeholder="Ingresar sitio web">
 
               </div>
 
@@ -246,9 +285,37 @@ MODAL EDITAR ADMINISTRADORA
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="editarRazonSocial" id="editarRazonSocial" required>
+                <input type="text" class="form-control input-lg" name="eRazonSocial" id="eRazonSocial" required>
 
-                 <input type="hidden"  name="idAdministradora" id="idAdministradora" required>
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA NOMBRE FANTASIA -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="eNombreFantasia" id="eNombreFantasia" required>
+
+              </div>
+
+            </div>
+
+
+            <!-- ENTRADA PARA SITIO WEB -->
+            
+            <div class="form-group">
+              
+              <div class="input-group">
+              
+                <span class="input-group-addon"><i class="fa fa-th"></i></span> 
+
+                <input type="text" class="form-control input-lg" name="eSitioWeb" id="eSitioWeb">
 
               </div>
 

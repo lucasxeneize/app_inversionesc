@@ -26,6 +26,7 @@ class AjaxAdministradoras{
 /*=============================================
 EDITAR CATEGORÍA
 =============================================*/	
+
 if(isset($_POST["idAdministradora"])){
 
 	$administradora = new AjaxAdministradoras();

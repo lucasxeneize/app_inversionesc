@@ -1,6 +1,7 @@
 /*=============================================
 EDITAR
 =============================================*/
+
 $(".tablas").on("click", ".btnEditarInstrumento", function(){
 
 	var idInstrumento = $(this).attr("idInstrumento");

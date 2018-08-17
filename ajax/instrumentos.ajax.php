@@ -3,6 +3,8 @@
 require_once "../controladores/instrumentos.controlador.php";
 require_once "../modelos/instrumentos.modelo.php";
 
+
+
 class AjaxInstrumentos{
 
 	/*=============================================
@@ -26,6 +28,7 @@ class AjaxInstrumentos{
 /*=============================================
 EDITAR
 =============================================*/	
+
 if(isset($_POST["idInstrumento"])){
 
 	$categoria = new AjaxInstrumentos();

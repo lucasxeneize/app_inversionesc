@@ -10,10 +10,12 @@ class ModeloAdministradoras{
 
 	static public function mdlIngresarAdministradora($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(rut, razon_social) VALUES (:rut, :razon_social)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(rut, razon_social,nombre_fantasia,sitio_Web) VALUES (:rut, :razon_social,:nombre_fantasia,:sitio_Web)");
 
 		$stmt->bindParam(":rut", $datos["rut"], PDO::PARAM_STR);
 		$stmt->bindParam(":razon_social", $datos["razon_social"], PDO::PARAM_STR);
+		$stmt->bindParam(":nombre_fantasia", $datos["nombre_fantasia"], PDO::PARAM_STR);
+		$stmt->bindParam(":sitio_web", $datos["sitio_web"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
 
@@ -31,34 +33,12 @@ class ModeloAdministradoras{
 	}
 
 	/*=============================================
-	MOSTRAR ADMINISTRADORAS
+	MOSTRAR
 	=============================================*/
 
 	static public function mdlMostrarAdministradoras($tabla, $item, $valor){
 
-		if($item != null){
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
-
-			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-
-			$stmt -> execute();
-
-			return $stmt -> fetch();
-
-		}else{
-
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
-
-			$stmt -> execute();
-
-			return $stmt -> fetchAll();
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
+		return Conexion::query($tabla, $item, $valor);
 
 	}
 
@@ -68,10 +48,15 @@ class ModeloAdministradoras{
 
 	static public function mdlEditarAdministradora($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET rut = :rut, razon_social = :razon_social WHERE id = :id");
+		/*echo '<script>console.log("NUEVOmdlEditarAdministradora");</script>';
+		echo '<script>console.log("id:'.$datos["id"].'");</script>';*/
+
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET rut = :rut, razon_social = :razon_social, nombre_fantasia = :nombre_fantasia, sitio_web = :sitio_web  WHERE id = :id");
 
 		$stmt -> bindParam(":rut", $datos["rut"], PDO::PARAM_STR);
 		$stmt -> bindParam(":razon_social", $datos["razon_social"], PDO::PARAM_STR);
+		$stmt -> bindParam(":nombre_fantasia", $datos["nombre_fantasia"], PDO::PARAM_STR);
+		$stmt -> bindParam(":sitio_web", $datos["sitio_web"], PDO::PARAM_STR);
 		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
 		if($stmt->execute()){

@@ -8,7 +8,7 @@ class ControladorInstrumentos{
 
 	static public function ctrCrearInstrumento(){
 
-		echo '<script>console.log("ctrCrearInstrumento 1");</script>';
+		//echo '<script>console.log("ctrCrearInstrumento 1");</script>';
 		
 		if(isset($_POST["nNombre"])){
 
@@ -93,7 +93,7 @@ class ControladorInstrumentos{
 
 	static public function ctrEditarInstrumento(){
 
-		echo '<script>console.log("ctrEditarInstrumento 1");</script>';
+		//echo '<script>console.log("ctrEditarInstrumento 1");</script>';
 
 
 		if(isset($_POST["eNombre"])){
@@ -102,7 +102,8 @@ class ControladorInstrumentos{
 
 				$tabla = "instrumentos";
 
-				$datos = array("nombre"=>$_POST["eNombre"],
+				$datos = array("id_administradora" => $_POST["nAdministradora"],
+							    "nombre"=>$_POST["eNombre"],
 								"serie"=>$_POST["eSerie"],
 							   "id"=>$_POST["idInstrumento"]);
 

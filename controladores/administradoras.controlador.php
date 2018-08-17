@@ -8,7 +8,7 @@ class ControladorAdministradoras{
 
 	static public function ctrCrearAdministradora(){
 
-		echo '<script>console.log("ctrCrearAdministradora");</script>';
+		//echo '<script>console.log("ctrCrearAdministradora");</script>';
 
 		if(isset($_POST["nuevaRazonSocial"])){
 
@@ -19,7 +19,9 @@ class ControladorAdministradoras{
 				$datos = $_POST["nuevaRazonSocial"];
 
 				$datos = array("razon_social" => $_POST["nuevaRazonSocial"],
-					           "rut" => $_POST["nuevoRut"]);
+					           "rut" => $_POST["nuevoRut"],
+					       		"nombre_fantasia" => $_POST["nNombrefantasia"],
+					       		"sitio_web" => $_POST["nSitioWeb"],);
 				
 				$respuesta = ModeloAdministradoras::mdlIngresarAdministradora($tabla, $datos);
 
@@ -75,8 +77,8 @@ class ControladorAdministradoras{
 	=============================================*/
 
 	static public function ctrMostrarAdministradoras($item, $valor){
-		
-		echo '<script>console.log("ctrMostrarAdministradoras");</script>';
+
+		//echo '<script>console.log("ctrMostrarAdministradoras");</script>';
 
 		$tabla = "administradoras";
 
@@ -94,14 +96,21 @@ class ControladorAdministradoras{
 
 		echo '<script>console.log("ctrEditarAdministradora");</script>';
 
-		if(isset($_POST["editarRazonSocial"])){
+		if(isset($_POST["eRazonSocial"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["editarRazonSocial"])){
+			echo '<script>console.log("rz:'.$_POST["eRazonSocial"].'");</script>';
+
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ. ]+$/', $_POST["eRazonSocial"])){
 
 				$tabla = "administradoras";
 
-				$datos = array("razon_social"=>$_POST["editarRazonSocial"],
+				$datos = array("rut"=>$_POST["editarRut"],
+							   "razon_social"=>$_POST["eRazonSocial"],
+							   "nombre_fantasia"=>$_POST["eNombreFantasia"],
+							   "sitio_web"=>$_POST["eSitioWeb"],
 							   "id"=>$_POST["idAdministradora"]);
+
+				//echo '<script>console.log("aa:'.print_r($_POST["idAdministradora"]).'");</script>';
 
 				$respuesta = ModeloAdministradoras::mdlEditarAdministradora($tabla, $datos);
 

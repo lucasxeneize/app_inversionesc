@@ -1,9 +1,15 @@
 /*=============================================
 EDITAR ADMINISTRADORAS
 =============================================*/
+
 $(".tablas").on("click", ".btnEditarAdministradora", function(){
+    
+    /*alert("editar administradora");
+    console.log("editar administradora");*/
 
 	var idAdministradora = $(this).attr("idAdministradora");
+
+    //alert(idAdministradora);
 
 	var datos = new FormData();
 	datos.append("idAdministradora", idAdministradora);
@@ -21,7 +27,10 @@ $(".tablas").on("click", ".btnEditarAdministradora", function(){
         console.log(respuesta);
 
             $("#editarRut").val(respuesta["rut"]);
-     		$("#editarRazonSocial").val(respuesta["razon_social"]);
+     		$("#eRazonSocial").val(respuesta["razon_social"]);
+            $("#eNombreFantasia").val(respuesta["nombre_fantasia"]);
+            $("#eSitioWeb").val(respuesta["sitio_web"]);
+
      		$("#idAdministradora").val(respuesta["id"]);
 
      	}
