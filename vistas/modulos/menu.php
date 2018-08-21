@@ -136,6 +136,17 @@
 
 			</li>
 
+			<li>
+
+				<a href="movimientos">
+
+					<i class="fa fa-user"></i>
+					<span>Movimientos</span>
+
+				</a>
+
+			</li>
+
 		</ul>
 
 	 </section>
