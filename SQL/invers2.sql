@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2018 a las 21:10:57
+-- Tiempo de generación: 21-08-2018 a las 21:13:57
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -47,6 +47,18 @@ INSERT INTO `administradoras` (`id`, `rut`, `razon_social`, `nombre_fantasia`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cuotas`
+--
+
+CREATE TABLE `cuotas` (
+  `id` int(11) NOT NULL,
+  `id_instrumento` int(11) NOT NULL,
+  `valor` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `instrumentos`
 --
 
@@ -67,6 +79,61 @@ INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`) VALUES
 (8, 'SANTANDER A', 47, 'A'),
 (9, 'ACCIONES MID CAP CHILE', 47, 'UNIVERSAL');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movimientos`
+--
+
+CREATE TABLE `movimientos` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `id_instrumento` int(11) NOT NULL,
+  `operacion` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `monto` decimal(10,0) NOT NULL,
+  `cuotas` decimal(10,0) NOT NULL,
+  `valor_cuota` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `series`
+--
+
+CREATE TABLE `series` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(25) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `usuario` text COLLATE utf8_spanish_ci NOT NULL,
+  `password` text COLLATE utf8_spanish_ci NOT NULL,
+  `perfil` text COLLATE utf8_spanish_ci NOT NULL,
+  `foto` text COLLATE utf8_spanish_ci NOT NULL,
+  `estado` int(11) NOT NULL,
+  `ultimo_login` datetime NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
+(1, 'Administrador', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', 'vistas/img/usuarios/admin/191.jpg', 1, '2018-08-21 13:13:12', '2018-08-21 18:13:12'),
+(57, 'Juan Fernando Urrego', 'juan', '$2a$07$asxx54ahjppf45sd87a5auwRi.z6UsW7kVIpm0CUEuCpmsvT2sG6O', 'Vendedor', 'vistas/img/usuarios/juan/461.jpg', 1, '2017-12-21 12:07:24', '2017-12-21 17:07:24'),
+(58, 'Julio Gómez', 'julio', '$2a$07$asxx54ahjppf45sd87a5auQhldmFjGsrgUipGlmQgDAcqevQZSAAC', 'Especial', 'vistas/img/usuarios/julio/100.png', 1, '2017-12-21 12:07:39', '2017-12-21 17:07:39'),
+(59, 'Ana Gonzalez', 'ana', '$2a$07$asxx54ahjppf45sd87a5auLd2AxYsA/2BbmGKNk2kMChC3oj7V0Ca', 'Vendedor', 'vistas/img/usuarios/ana/260.png', 1, '2017-12-21 12:07:47', '2017-12-21 17:07:47');
+
 --
 -- Índices para tablas volcadas
 --
@@ -79,11 +146,37 @@ ALTER TABLE `administradoras`
   ADD UNIQUE KEY `rut` (`rut`);
 
 --
+-- Indices de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `instrumentos_cuotas` (`id_instrumento`);
+
+--
 -- Indices de la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `instrumentos_administradoras` (`id_administradora`);
+
+--
+-- Indices de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `instrumentos_movimientos` (`id_instrumento`);
+
+--
+-- Indices de la tabla `series`
+--
+ALTER TABLE `series`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -96,20 +189,56 @@ ALTER TABLE `administradoras`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
+-- AUTO_INCREMENT de la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `series`
+--
+ALTER TABLE `series`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cuotas`
+--
+ALTER TABLE `cuotas`
+  ADD CONSTRAINT `instrumentos_cuotas` FOREIGN KEY (`id_instrumento`) REFERENCES `instrumentos` (`id`);
 
 --
 -- Filtros para la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
   ADD CONSTRAINT `instrumentos_administradoras` FOREIGN KEY (`id_administradora`) REFERENCES `administradoras` (`id`);
+
+--
+-- Filtros para la tabla `movimientos`
+--
+ALTER TABLE `movimientos`
+  ADD CONSTRAINT `instrumentos_movimientos` FOREIGN KEY (`id_instrumento`) REFERENCES `instrumentos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
