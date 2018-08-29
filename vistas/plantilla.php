@@ -152,6 +152,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/categorias.js"></script>
 <script src="vistas/js/administradoras.js"></script>
 <script src="vistas/js/instrumentos.js"></script>
+<script src="vistas/js/movimientos.js"></script>
 
 </body>
 </html>

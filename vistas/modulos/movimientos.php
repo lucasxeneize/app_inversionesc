@@ -42,12 +42,13 @@
            
            <th style="width:10px">#</th>
            <th>Fecha</th>
+           <th>Administradora</th>
            <th>Instrumento</th>
+           <th>Serie</th>
            <th>Operación</th>
            <th>Monto en $</th>
            <th>Valor cuota $</th>
            <th>Cuotas</th>
-           <th>Saldo en Cuotas</th>
            <th>Acciones</th>
 
          </tr> 
@@ -56,77 +57,59 @@
 
         <tbody>
           
-          <tr>
-            <td>1</td>
-            <td>05/01/2017</td>
-            <td>Prioridad Serie C</td>
-            <td>Inversión</td>
-            <td>$ 25.000</td>
-            <td>$ 755,8844</td>
-            <td>15,2245</td>
-            <td>15,2245</td>
-            <td>
+        <?php
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+          $item = null;
+          $valor = null;
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+          $movimientos = ControladorMovimientos::ctrMostrarMovimientos($item, $valor);
 
-              </div>  
+          foreach ($movimientos as $key => $value) {
+           
+            echo ' <tr>
 
-            </td>
+                    <td>'.($key+1).'</td>
 
-          </tr>
+                    <td class="text-uppercase">'.$value["fecha"].'</td>';
 
-          <tr>
-            <td>2</td>
-            <td>05/02/2017</td>
-            <td>Prioridad Serie C</td>
-            <td>Inversión</td>
-            <td>$ 25.000</td>
-            <td>$ 765,8844</td>
-            <td>15,6245</td>
-            <td>30,8745</td>
-            <td>
+                    $item = "id";
+                    $valor = $value["id_instrumento"];
+                    $instrumento = ControladorInstrumentos::ctrMostrarInstrumentos($item, $valor);
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                    $item = "id";
+                    $valor = $instrumento["id_administradora"];
+                    $administradora = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                    echo '<td class="text-uppercase">'.$administradora["nombre_fantasia"].'</td>
+                    <td class="text-uppercase">'.$instrumento["nombre"].'</td>
+                    <td class="text-uppercase">'.$instrumento["serie"].'</td>
+                    <td class="text-uppercase">'.$value["operacion"].'</td>
+                    <td class="text-uppercase">'.$value["monto"].'</td>
+                    <td class="text-uppercase">'.$value["valor_cuota"].'</td>
+                    <td class="text-uppercase">'.$value["cuotas"].'</td>
+                   
 
-              </div>  
+                    <td>
 
-            </td>
+                      <div class="btn-group">
+                          
+                        <button class="btn btn-warning btnEditarMovimiento" idMovimiento="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMovimiento"><i class="fa fa-pencil"></i></button>
 
-          </tr>
+                        <button class="btn btn-danger btnEliminarMovimiento" idMovimiento="'.$value["id"].'">
+                          <i class="fa fa-times"></i>
+                        </button>
 
-          <tr>
-            <td>3</td>
-            <td>12/10/2017</td>
-            <td>Acc. Nacionales Serie A</td>
-            <td>Inversión</td>
-            <td>$ 200.000</td>
-            <td>$ 1.228,9630</td>
-            <td>162,7388</td>
-            <td>162,7388</td>
-            <td>
+                      </div>  
 
-              <div class="btn-group">
-                  
-                <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                    </td>
 
-                <button class="btn btn-danger"><i class="fa fa-times"></i></button>
+                  </tr>';
+          }
 
-              </div>  
+        ?>
 
-            </td>
 
-          </tr>
-
-         
-
+        
         </tbody>
 
        </table>
@@ -202,10 +185,16 @@ MODAL AGREGAR MOVIMIENTO
                 $item = null;
                 $valor = null;
 
-                $administradoras = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+                $instrumentos = ControladorInstrumentos::ctrMostrarInstrumentos($item, $valor);
 
-                  foreach ($administradoras as $key => $value) {
-                    echo '<option value="'.$value["id"].'">'.$value["nombre_fantasia"].'</option>"';
+                  foreach ($instrumentos as $key => $value) {
+
+                    $item = "id";
+                    $valor = $value["id_administradora"];
+                    $administradora = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+
+
+                    echo '<option value="'.$value["id"].'">'.$administradora['nombre_fantasia'].'-'.$value["nombre"].'-'.$value["serie"].'-'.$value["cuenta"].'</option>"';
                 }
 
               ?>
@@ -248,8 +237,8 @@ MODAL AGREGAR MOVIMIENTO
 
         <?php
 
-          $crearAdministradora = new ControladorAdministradoras();
-          $crearAdministradora -> ctrCrearAdministradora();
+          $crearMovimiento = new ControladorMovimientos();
+          $crearMovimiento -> ctrCrearMovimiento();
 
         ?>
 
@@ -362,8 +351,8 @@ MODAL EDITAR MOVIMIENTO
 
       <?php
 
-          $editarAdministradora = new ControladorAdministradoras();
-          $editarAdministradora -> ctrEditarAdministradora();
+          $editarMovimiento = new ControladorMovimientos();
+          $editarMovimiento -> ctrEditarMovimiento();
 
         ?> 
 
@@ -377,8 +366,8 @@ MODAL EDITAR MOVIMIENTO
 
 <?php
 
-  $borrarAdministradora = new ControladorAdministradoras();
-  $borrarAdministradora -> ctrBorrarAdministradora();
+  $borrarMovimiento = new ControladorMovimientos();
+  $borrarMovimiento -> ctrBorrarMovimiento();
 
 ?>
 

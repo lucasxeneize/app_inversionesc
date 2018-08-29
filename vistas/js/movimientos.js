@@ -1,16 +1,18 @@
 /*=============================================
-EDITAR CATEGORIA
+EDITAR MOVIMIENTO
 =============================================*/
 
-$(".tablas").on("click", ".btnEditarCategoria", function(){
+console.log("movimientos","movimientos.js")
 
-	var idCategoria = $(this).attr("idCategoria");
+$(".tablas").on("click", ".btnEditarMovimiento", function(){
+
+	var idMovimiento = $(this).attr("idMovimiento");
 
 	var datos = new FormData();
-	datos.append("idCategoria", idCategoria);
+	datos.append("idMovimiento", idMovimiento);
 
 	$.ajax({
-		url: "ajax/categorias.ajax.php",
+		url: "ajax/movimientos.ajax.php",
 		method: "POST",
       	data: datos,
       	cache: false,
@@ -19,8 +21,8 @@ $(".tablas").on("click", ".btnEditarCategoria", function(){
      	dataType:"json",
      	success: function(respuesta){
 
-     		$("#editarCategoria").val(respuesta["categoria"]);
-     		$("#idCategoria").val(respuesta["id"]);
+     		$("#editarMovimiento").val(respuesta["movimiento"]);
+     		$("#idMovimiento").val(respuesta["id"]);
 
      	}
 
@@ -30,26 +32,25 @@ $(".tablas").on("click", ".btnEditarCategoria", function(){
 })
 
 /*=============================================
-ELIMINAR CATEGORIA
+ELIMINAR MOVIMIENTO
 =============================================*/
-$(".tablas").on("click", ".btnEliminarCategoria", function(){
-
-	 var idCategoria = $(this).attr("idCategoria");
+$(".tablas").on("click", ".btnEliminarMovimiento", function(){
+	 var idMovimiento = $(this).attr("idMovimiento");
 
 	 swal({
-	 	title: '¿Está seguro de borrar la categoría?',
+	 	title: '¿Está seguro de borrar el movimiento?',
 	 	text: "¡Si no lo está puede cancelar la acción!",
 	 	type: 'warning',
 	 	showCancelButton: true,
 	 	confirmButtonColor: '#3085d6',
 	 	cancelButtonColor: '#d33',
 	 	cancelButtonText: 'Cancelar',
-	 	confirmButtonText: 'Si, borrar categoría!'
+	 	confirmButtonText: 'Si, borrar movimiento!'
 	 }).then(function(result){
 
 	 	if(result.value){
 
-	 		window.location = "index.php?ruta=categorias&idCategoria="+idCategoria;
+	 		window.location = "index.php?ruta=movimientos&idMovimiento="+idMovimiento;
 
 	 	}
 

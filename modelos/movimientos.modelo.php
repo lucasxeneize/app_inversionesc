@@ -10,14 +10,18 @@ class ModeloMovimientos{
 
 	static public function mdlIngresarMovimiento($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_instrumento, operacion, monto, cuotas, valor_cuota) VALUES (:fecha, :id_instrumento, :operacion, :monto, :cuotas, :valor_cuota)");
+		/*echo '<script>console.log("mdlIngresarMovimiento");</script>';
+		echo '<script>console.log("id_instrumento:'.$datos["id_instrumento"].'");</script>';
+		echo '<script>console.log('.json_encode($datos).');</script>';*/
+
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(fecha, id_instrumento, operacion, monto, cuotas, valor_cuota) VALUES (:fecha, :id_instrumento, :operacion, :monto, 10, 20)");
 
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_instrumento", $datos["id_instrumento"], PDO::PARAM_INT);
 		$stmt->bindParam(":operacion", $datos["operacion"], PDO::PARAM_STR);
 		$stmt->bindParam(":monto", $datos["monto"], PDO::PARAM_INT);
-		$stmt->bindParam(":cuotas", $datos["cuotas"], PDO::PARAM_INT);
-		$stmt->bindParam(":valor_cuota", $datos["valor_cuota"], PDO::PARAM_INT);
+		/*$stmt->bindParam(":cuotas", $datos["cuotas"], PDO::PARAM_INT);
+		$stmt->bindParam(":valor_cuota", $datos["valor_cuota"], PDO::PARAM_INT);*/
 		
 		if($stmt->execute()){
 
@@ -50,18 +54,17 @@ class ModeloMovimientos{
 
 	static public function mdlEditarMovimiento($tabla, $datos){
 
-		/*echo '<script>console.log("NUEVOmdlEditarAdministradora");</script>';
+		/*echo '<script>console.log("mdlEditarMovimiento");</script>';
 		echo '<script>console.log("id:'.$datos["id"].'");</script>';*/
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, id_instrumento = :id_instrumento, operacion = :operacion, monto = :monto, cuotas = :cuotas, valor_cuota = :valor_cuota  WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, id_instrumento = :id_instrumento, operacion = :operacion, monto = :monto WHERE id = :id");
 
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_instrumento", $datos["id_instrumento"], PDO::PARAM_INT);
 		$stmt->bindParam(":operacion", $datos["operacion"], PDO::PARAM_STR);
 		$stmt->bindParam(":monto", $datos["monto"], PDO::PARAM_INT);
-		$stmt->bindParam(":cuotas", $datos["cuotas"], PDO::PARAM_INT);
-		$stmt->bindParam(":valor_cuota", $datos["valor_cuota"], PDO::PARAM_INT);
-		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		/*$stmt->bindParam(":cuotas", $datos["cuotas"], PDO::PARAM_INT);
+		$stmt->bindParam(":valor_cuota", $datos["valor_cuota"], PDO::PARAM_INT);*/
 
 		if($stmt->execute()){
 
