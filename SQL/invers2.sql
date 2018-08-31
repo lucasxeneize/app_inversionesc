@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-08-2018 a las 21:13:57
+-- Tiempo de generación: 31-08-2018 a las 22:23:25
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -66,18 +66,19 @@ CREATE TABLE `instrumentos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
   `id_administradora` int(11) NOT NULL,
-  `serie` varchar(15) COLLATE utf8_spanish_ci NOT NULL
+  `serie` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `cuenta` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `instrumentos`
 --
 
-INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`) VALUES
-(6, 'Prioridad Serie C', 32, 'C'),
-(7, 'Accionario Nacionales', 32, 'A'),
-(8, 'SANTANDER A', 47, 'A'),
-(9, 'ACCIONES MID CAP CHILE', 47, 'UNIVERSAL');
+INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`, `cuenta`) VALUES
+(6, 'Prioridad', 32, 'C', '001'),
+(7, 'Accionario Nacionales', 32, 'A', NULL),
+(8, 'SANTANDER A', 47, 'A', NULL),
+(9, 'ACCIONES MID CAP CHILE', 47, 'UNIVERSAL', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,11 +90,38 @@ CREATE TABLE `movimientos` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `id_instrumento` int(11) NOT NULL,
-  `operacion` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `monto` decimal(10,0) NOT NULL,
-  `cuotas` decimal(10,0) NOT NULL,
-  `valor_cuota` decimal(10,0) NOT NULL
+  `id_operacion` int(11) DEFAULT NULL,
+  `monto` float NOT NULL,
+  `cuotas` float NOT NULL,
+  `valor_cuota` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `movimientos`
+--
+
+INSERT INTO `movimientos` (`id`, `fecha`, `id_instrumento`, `id_operacion`, `monto`, `cuotas`, `valor_cuota`) VALUES
+(1, '2017-05-01', 7, 1, 115000, 7558840, 152245);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `operaciones`
+--
+
+CREATE TABLE `operaciones` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(15) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `operaciones`
+--
+
+INSERT INTO `operaciones` (`id`, `nombre`) VALUES
+(1, 'Inversión'),
+(2, 'Comisión'),
+(3, 'Rescate');
 
 -- --------------------------------------------------------
 
@@ -129,7 +157,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
-(1, 'Administrador', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', 'vistas/img/usuarios/admin/191.jpg', 1, '2018-08-21 13:13:12', '2018-08-21 18:13:12'),
+(1, 'Administrador', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', 'vistas/img/usuarios/admin/191.jpg', 1, '2018-08-31 12:54:01', '2018-08-31 17:54:01'),
 (57, 'Juan Fernando Urrego', 'juan', '$2a$07$asxx54ahjppf45sd87a5auwRi.z6UsW7kVIpm0CUEuCpmsvT2sG6O', 'Vendedor', 'vistas/img/usuarios/juan/461.jpg', 1, '2017-12-21 12:07:24', '2017-12-21 17:07:24'),
 (58, 'Julio Gómez', 'julio', '$2a$07$asxx54ahjppf45sd87a5auQhldmFjGsrgUipGlmQgDAcqevQZSAAC', 'Especial', 'vistas/img/usuarios/julio/100.png', 1, '2017-12-21 12:07:39', '2017-12-21 17:07:39'),
 (59, 'Ana Gonzalez', 'ana', '$2a$07$asxx54ahjppf45sd87a5auLd2AxYsA/2BbmGKNk2kMChC3oj7V0Ca', 'Vendedor', 'vistas/img/usuarios/ana/260.png', 1, '2017-12-21 12:07:47', '2017-12-21 17:07:47');
@@ -164,7 +192,14 @@ ALTER TABLE `instrumentos`
 --
 ALTER TABLE `movimientos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `instrumentos_movimientos` (`id_instrumento`);
+  ADD KEY `instrumentos_movimientos` (`id_instrumento`),
+  ADD KEY `operaciones_movimientos` (`id_operacion`);
+
+--
+-- Indices de la tabla `operaciones`
+--
+ALTER TABLE `operaciones`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `series`
@@ -204,7 +239,13 @@ ALTER TABLE `instrumentos`
 -- AUTO_INCREMENT de la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `operaciones`
+--
+ALTER TABLE `operaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `series`
@@ -238,7 +279,8 @@ ALTER TABLE `instrumentos`
 -- Filtros para la tabla `movimientos`
 --
 ALTER TABLE `movimientos`
-  ADD CONSTRAINT `instrumentos_movimientos` FOREIGN KEY (`id_instrumento`) REFERENCES `instrumentos` (`id`);
+  ADD CONSTRAINT `instrumentos_movimientos` FOREIGN KEY (`id_instrumento`) REFERENCES `instrumentos` (`id`),
+  ADD CONSTRAINT `operaciones_movimientos` FOREIGN KEY (`id_operacion`) REFERENCES `operaciones` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
