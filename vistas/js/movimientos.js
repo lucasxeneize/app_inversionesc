@@ -2,14 +2,15 @@
 EDITAR MOVIMIENTO
 =============================================*/
 
-console.log("movimientos","movimientos.js")
-
 $(".tablas").on("click", ".btnEditarMovimiento", function(){
+	console.log("btnEditarMovimiento");
 
 	var idMovimiento = $(this).attr("idMovimiento");
-
+	
 	var datos = new FormData();
 	datos.append("idMovimiento", idMovimiento);
+	
+
 
 	$.ajax({
 		url: "ajax/movimientos.ajax.php",
@@ -21,8 +22,17 @@ $(".tablas").on("click", ".btnEditarMovimiento", function(){
      	dataType:"json",
      	success: function(respuesta){
 
-     		$("#editarMovimiento").val(respuesta["movimiento"]);
      		$("#idMovimiento").val(respuesta["id"]);
+     		$("#eFechaMaterializacion").val(respuesta["fecha"]);
+			$('#eInstrumento option[value="'+respuesta["id_instrumento"]+'"]').attr("selected",true);
+			//$('#eInstrumento > option[value="'+respuesta["id_instrumento"]+'"]').attr('selected',true);
+
+			//alert(respuesta["id_operacion"]);
+
+			$('#eOperacion option[value="'+respuesta["id_operacion"]+'"]').attr("selected",true);
+     		$("#eMonto").val(respuesta["monto"]);
+
+     		
 
      	}
 

@@ -80,10 +80,14 @@
                     $valor = $instrumento["id_administradora"];
                     $administradora = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
 
+                    $item = "id";
+                    $valor = $value["id_operacion"];
+                    $operacion = ControladorOperaciones::ctrMostrarOperaciones($item, $valor);
+
                     echo '<td class="text-uppercase">'.$administradora["nombre_fantasia"].'</td>
                     <td class="text-uppercase">'.$instrumento["nombre"].'</td>
                     <td class="text-uppercase">'.$instrumento["serie"].'</td>
-                    <td class="text-uppercase">'.$value["operacion"].'</td>
+                    <td class="text-uppercase">'.$operacion["nombre"].'</td>
                     <td class="text-uppercase">'.$value["monto"].'</td>
                     <td class="text-uppercase">'.$value["valor_cuota"].'</td>
                     <td class="text-uppercase">'.$value["cuotas"].'</td>
@@ -93,7 +97,7 @@
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarMovimiento" idMovimiento="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMovimiento"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btnEditarMovimiento" idMovimiento="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarMovimiento" idInstrumento="'.$value["id_instrumento"].'"><i class="fa fa-pencil"></i></button>
 
                         <button class="btn btn-danger btnEliminarMovimiento" idMovimiento="'.$value["id"].'">
                           <i class="fa fa-times"></i>
@@ -160,16 +164,28 @@ MODAL AGREGAR MOVIMIENTO
               <input type="date" class="form-control" name="nFechaMaterializacion" id="nFechaMaterializacion" placeholder="Ingrese fecha materialización">
             </div>
 
+            <!-- ENTRADA PARA SELECCIONAR OPERACIÓN -->
+
             <div class="form-group">
               
-             <!-- ENTRADA PARA SELECCIONAR OPERACIÓN -->
-              <label>Operación</label>
+            <label>Operación</label>
               
-              <select class="form-control" name="nOperacion">
-                <option vlaue="">Seleccione una opción</option>
-                <option>Inversión</option>
-                <option>Comisión</option>
-                <option>Rescate</option>
+            <select class="form-control" name="nOperacion" id="nOperacion">
+            
+            <option value="">Seleccione una opción</option>
+            
+            <?php
+              $item = null;
+              $valor = null;
+
+              $operaciones = ControladorOperaciones::ctrMostrarOperaciones($item, $valor);
+
+              foreach ($operaciones as $key => $value) {
+
+                echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>"';
+              }
+
+              ?>
               </select>
             
             </div>
@@ -198,13 +214,6 @@ MODAL AGREGAR MOVIMIENTO
                 }
 
               ?>
-                <!--option>Scotia - Prioridad - Serie C</option>
-                <option>Scotia - Acc. Nacionales - Serie A</option>
-                <option>Cuprum - Cuenta 2 - Fondo A</option>
-                <option>Santander - Santander - A</option>
-                <option>Santander - Mid Cap - Serie A</option>
-                <option>BanChile - Mid Cap - Serie A - Cuenta 00</option>
-                <option>BanChile - Mid Cap - Serie A - Cuenta 01</option-->
               </select>
 
               <p class="help-block">Administradora-Instrumento-Serie-Cuenta</p>
@@ -290,17 +299,29 @@ MODAL EDITAR MOVIMIENTO
               <input type="hidden" class="form-control" name="idMovimiento" id="idMovimiento">
 
             </div>
+              
+            <!-- ENTRADA PARA SELECCIONAR OPERACIÓN -->
 
             <div class="form-group">
               
-             <!-- ENTRADA PARA SELECCIONAR OPERACIÓN -->
-              <label>Operación</label>
+            <label>Operación</label>
               
-              <select class="form-control" name="eOperacion">
-                <option vlaue="">Seleccione una opción</option>
-                <option>Inversión</option>
-                <option>Comisión</option>
-                <option>Rescate</option>
+            <select class="form-control" name="eOperacion" id="eOperacion">
+            
+            <option value="">Seleccione una opción</option>
+            
+            <?php
+              $item = null;
+              $valor = null;
+
+              $operaciones = ControladorOperaciones::ctrMostrarOperaciones($item, $valor);
+
+              foreach ($operaciones as $key => $value) {
+
+                echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>"';
+              }
+
+              ?>
               </select>
             
             </div>
@@ -308,23 +329,34 @@ MODAL EDITAR MOVIMIENTO
             <!-- ENTRADA PARA SELECCIONAR INSTRUMENTO -->
             <div class="form-group">
             
-              <label>Instrumento</label>
-            
-              <select class="form-control" name="eInstrumento">
-                <option vlaue="">Seleccione una opción</option>
-                <option>Scotia - Prioridad - Serie C</option>
-                <option>Scotia - Acc. Nacionales - Serie A</option>
-                <option>Cuprum - Cuenta 2 - Fondo A</option>
-                <option>Santander - Santander - A</option>
-                <option>Santander - Mid Cap - Serie A</option>
-                <option>BanChile - Mid Cap - Serie A - Cuenta 00</option>
-                <option>BanChile - Mid Cap - Serie A - Cuenta 01</option>
+            <label>Instrumento</label>
+          
+            <select class="form-control" name="eInstrumento" id="eInstrumento">
+            <option value="">Seleccione una opción</option>
+            <?php
+              $item = null;
+              $valor = null;
+
+              $instrumentos = ControladorInstrumentos::ctrMostrarInstrumentos($item, $valor);
+
+              foreach ($instrumentos as $key => $value) {
+
+                $item = "id";
+                $valor = $value["id_administradora"];
+                $administradora = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+
+
+                echo '<option value="'.$value["id"].'">'.$administradora['nombre_fantasia'].'-'.$value["nombre"].'-'.$value["serie"].'-'.$value["cuenta"].'</option>"';
+              }
+
+              ?>
               </select>
 
               <p class="help-block">Administradora-Instrumento-Serie-Cuenta</p>
             
             </div>
-         
+
+            <!-- ENTRADA PARA EDITAR MONTO -->
             <div class="form-group">
 
               <label for="nMonto">Monto</label>
@@ -370,5 +402,3 @@ MODAL EDITAR MOVIMIENTO
   $borrarMovimiento -> ctrBorrarMovimiento();
 
 ?>
-
-

@@ -1,22 +1,22 @@
 <?php
 
-require_once "../controladores/categorias.controlador.php";
-require_once "../modelos/categorias.modelo.php";
+require_once "../controladores/movimientos.controlador.php";
+require_once "../modelos/movimientos.modelo.php";
 
-class AjaxCategorias{
+class AjaxMovimientos{
 
 	/*=============================================
-	EDITAR CATEGORÍA
+	EDITAR MOVIMIENTO
 	=============================================*/	
 
-	public $idCategoria;
+	public $idMovimiento;
 
-	public function ajaxEditarCategoria(){
+	public function ajaxEditarMovimiento(){
 
 		$item = "id";
-		$valor = $this->idCategoria;
+		$valor = $this->idMovimiento;
 
-		$respuesta = ControladorCategorias::ctrMostrarCategorias($item, $valor);
+		$respuesta = ControladorMovimientos::ctrMostrarMovimientos($item, $valor);
 
 		echo json_encode($respuesta);
 
@@ -24,11 +24,11 @@ class AjaxCategorias{
 }
 
 /*=============================================
-EDITAR CATEGORÍA
+EDITAR MOVIMIENTO
 =============================================*/	
-if(isset($_POST["idCategoria"])){
+if(isset($_POST["idMovimiento"])){
 
-	$categoria = new AjaxCategorias();
-	$categoria -> idCategoria = $_POST["idCategoria"];
-	$categoria -> ajaxEditarCategoria();
+	$categoria = new AjaxMovimientos();
+	$categoria -> idMovimiento = $_POST["idMovimiento"];
+	$categoria -> ajaxEditarMovimiento();
 }

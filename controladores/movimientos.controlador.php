@@ -15,7 +15,7 @@ class ControladorMovimientos{
 			$tabla = "movimientos";
 
 			$datos = array("fecha" => $_POST["nFechaMaterializacion"],
-				           "operacion" => $_POST["nOperacion"],
+				           "id_operacion" => $_POST["nOperacion"],
 				           "id_instrumento"=>$_POST["nInstrumento"],
 				           "monto"=>$_POST["nMonto"]);
 
@@ -87,19 +87,19 @@ class ControladorMovimientos{
 
 	static public function ctrEditarMovimiento(){
 
-		//echo '<script>console.log("ctrEditarMovimiento 1");</script>';
-
-
 		if(isset($_POST["idMovimiento"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["eNombre"])){
+			//echo '<script>console.log("ctrEditarMovimiento 1");</script>';
+
+			//if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["eNombre"])){
 
 				$tabla = "movimientos";
 
-				$datos = array("fecha" => $_POST["nFechaMaterializacion"],
-				           "operacion" => $_POST["nOperacion"],
-				           "id_instrumento"=>$_POST["nInstrumento"],
-				           "monto"=>$_POST["nMonto"]);
+				$datos = array("fecha" => $_POST["eFechaMaterializacion"],
+				           "id_operacion" => $_POST["eOperacion"],
+				           "id_instrumento"=>$_POST["eInstrumento"],
+				           "monto"=>$_POST["eMonto"],
+				       	   "id"=>$_POST["idMovimiento"]);
 
 				$respuesta = ModeloMovimientos::mdlEditarMovimiento($tabla, $datos);
 
@@ -125,7 +125,7 @@ class ControladorMovimientos{
 				}
 
 
-			}else{
+			/*}else{
 
 				echo'<script>
 
@@ -144,7 +144,7 @@ class ControladorMovimientos{
 
 			  	</script>';
 
-			}
+			}*/
 
 		}
 
