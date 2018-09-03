@@ -147,6 +147,17 @@
 
 			</li>
 
+			<li>
+
+				<a href="cuotas">
+
+					<i class="fa fa-user"></i>
+					<span>Cuotas</span>
+
+				</a>
+
+			</li>
+
 		</ul>
 
 	 </section>
