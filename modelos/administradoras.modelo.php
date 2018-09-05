@@ -10,7 +10,8 @@ class ModeloAdministradoras{
 
 	static public function mdlIngresarAdministradora($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(rut, razon_social,nombre_fantasia,sitio_Web) VALUES (:rut, :razon_social,:nombre_fantasia,:sitio_Web)");
+		echo '<script>console.log("mdlIngresarAdministradora");</script>';
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(rut, razon_social,nombre_fantasia,sitio_Web) VALUES (:rut, :razon_social,:nombre_fantasia,:sitio_web)");
 
 		$stmt->bindParam(":rut", $datos["rut"], PDO::PARAM_STR);
 		$stmt->bindParam(":razon_social", $datos["razon_social"], PDO::PARAM_STR);

@@ -1,19 +1,18 @@
 /*=============================================
-EDITAR CUOTA
+EDITAR
 =============================================*/
 
 $(".tablas").on("click", ".btnEditarCuota", function(){
-	console.log("btnEditarCuota JS");
+
+	//console.log("btnEditarCuota=");
 
 	var fecha = $(this).attr("fecha");
 	var idInstrumento = $(this).attr("idInstrumento");
-	
-	//alert(fecha);
 
 	var datos = new FormData();
 	datos.append("fecha", fecha);
 	datos.append("idInstrumento", idInstrumento);
-
+	
 
 	$.ajax({
 		url: "ajax/cuotas.ajax.php",
@@ -25,8 +24,10 @@ $(".tablas").on("click", ".btnEditarCuota", function(){
      	dataType:"json",
      	success: function(respuesta){
 
+     		//alert("success cuotas");
+
      		$("#eFecha").val(respuesta["fecha"]);
-			$('#eInstrumento option[value="'+respuesta["id_instrumento"]+'"]').attr("selected",true);
+     		$('#eInstrumento option[value="'+respuesta["id_instrumento"]+'"]').attr("selected",true);
      		$("#eMonto").val(respuesta["valor"]);
      	}
 
@@ -36,9 +37,10 @@ $(".tablas").on("click", ".btnEditarCuota", function(){
 })
 
 /*=============================================
-ELIMINAR CUOTA
+ELIMINAR
 =============================================*/
 $(".tablas").on("click", ".btnEliminarCuota", function(){
+
 	var fecha = $(this).attr("fecha");
 	var idInstrumento = $(this).attr("idInstrumento");
 

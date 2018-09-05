@@ -79,6 +79,8 @@ class ControladorInstrumentos{
 
 	static public function ctrMostrarInstrumentos($item, $valor){
 
+	echo '<script>console.log("ctrMostrarInstrumentos");</script>';
+
 		$tabla = "instrumentos";
 
 		$respuesta = ModeloInstrumentos::mdlMostrarInstrumentos($tabla, $item, $valor);

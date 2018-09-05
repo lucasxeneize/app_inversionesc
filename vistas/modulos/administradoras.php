@@ -146,7 +146,7 @@ MODAL AGREGAR ADMINISTRADORA
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevoRut" placeholder="Ingresar rut" required>
+                <input type="text" class="form-control input-lg" name="nRut" placeholder="Ingresar rut" required>
 
               </div>
 
@@ -160,7 +160,7 @@ MODAL AGREGAR ADMINISTRADORA
               
                 <span class="input-group-addon"><i class="fa fa-th"></i></span> 
 
-                <input type="text" class="form-control input-lg" name="nuevaRazonSocial" placeholder="Ingresar razón social" required>
+                <input type="text" class="form-control input-lg" name="nRazonSocial" placeholder="Ingresar razón social" required>
 
               </div>
 

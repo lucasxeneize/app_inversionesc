@@ -81,7 +81,7 @@
 
                       <div class="btn-group">
                           
-                        <button class="btn btn-warning btnEditarCuota" fecha="'.$value["fecha"].'" idInstrumento="'.$value["id_instrumento"].'" data-toggle="modal" data-target="#modalEditarCuota" fecha="'.$value["fecha"].'" idInstrumento="'.$value["id_instrumento"].'"><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btnEditarCuota" fecha="'.$value["fecha"].'" idInstrumento="'.$value["id_instrumento"].'" data-toggle="modal" data-target="#modalEditarCuota"><i class="fa fa-pencil"></i></button>
 
                         <button class="btn btn-danger btnEliminarCuota" fecha="'.$value["fecha"].'" idInstrumento="'.$value["id_instrumento"].'">
                           <i class="fa fa-times"></i>
@@ -292,7 +292,7 @@ MODAL EDITAR CUOTA
             <!-- ENTRADA PARA EDITAR MONTO -->
             <div class="form-group">
 
-              <label for="nMonto">Monto</label>
+              <label for="eMonto">Monto</label>
 
               <input type="text" class="form-control" name="eMonto" id="eMonto">
 

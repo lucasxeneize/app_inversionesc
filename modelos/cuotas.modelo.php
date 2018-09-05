@@ -41,12 +41,12 @@ class ModeloCuotas{
 
 	static public function mdlMostrarCuotas($tabla, $item, $item2, $valor, $valor2){
 
-		echo '<script>console.log("mdlMostrarCuotas");</script>';
+		//echo '<script>console.log("mdlMostrarCuotas");</script>';
 
 		if($item != null){
 
 			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item AND $item2 = :$item2");
-
+	
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 			$stmt -> bindParam(":".$item2, $valor2, PDO::PARAM_INT);
 
@@ -76,12 +76,11 @@ class ModeloCuotas{
 
 	static public function mdlEditarCuota($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, id_instrumento = :id_instrumento, valor = :valor WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET fecha = :fecha, id_instrumento = :id_instrumento, valor = :valor WHERE fecha = :fecha AND id_instrumento = :id_instrumento");
 
 		$stmt->bindParam(":fecha", $datos["fecha"], PDO::PARAM_STR);
 		$stmt->bindParam(":id_instrumento", $datos["id_instrumento"], PDO::PARAM_INT);
 		$stmt->bindParam(":valor", $datos["valor"], PDO::PARAM_INT);
-		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
 

@@ -10,17 +10,17 @@ class ControladorAdministradoras{
 
 		//echo '<script>console.log("ctrCrearAdministradora");</script>';
 
-		if(isset($_POST["nuevaRazonSocial"])){
+		if(isset($_POST["nRazonSocial"])){
 
-			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaRazonSocial"])){
+			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nRazonSocial"])){
 
 				$tabla = "administradoras";
 
-				$datos = $_POST["nuevaRazonSocial"];
+				//$datos = $_POST["nRazonSocial"];
 
-				$datos = array("razon_social" => $_POST["nuevaRazonSocial"],
-					           "rut" => $_POST["nuevoRut"],
-					       		"nombre_fantasia" => $_POST["nNombrefantasia"],
+				$datos = array("razon_social" => $_POST["nRazonSocial"],
+					           "rut" => $_POST["nRut"],
+					       		"nombre_fantasia" => $_POST["nNombreFantasia"],
 					       		"sitio_web" => $_POST["nSitioWeb"],);
 				
 				$respuesta = ModeloAdministradoras::mdlIngresarAdministradora($tabla, $datos);

@@ -3,7 +3,7 @@
 require_once "../controladores/instrumentos.controlador.php";
 require_once "../modelos/instrumentos.modelo.php";
 
-
+echo '<script>console.log("instrumentos.ajax.php");</script>';
 
 class AjaxInstrumentos{
 

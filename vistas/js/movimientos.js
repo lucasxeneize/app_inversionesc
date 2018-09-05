@@ -22,6 +22,8 @@ $(".tablas").on("click", ".btnEditarMovimiento", function(){
      	dataType:"json",
      	success: function(respuesta){
 
+     		alert("isntt");
+
      		$("#idMovimiento").val(respuesta["id"]);
      		$("#eFechaMaterializacion").val(respuesta["fecha"]);
 			$('#eInstrumento option[value="'+respuesta["id_instrumento"]+'"]').attr("selected",true);

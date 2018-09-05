@@ -72,8 +72,6 @@ class ControladorCuotas{
 
 	static public function ctrMostrarCuotas($item, $item2, $valor, $valor2){
 
-		echo '<script>console.log("ctrMostrarCuotas");</script>';
-
 		$tabla = "valores_cuotas";
 
 		$respuesta = ModeloCuotas::mdlMostrarCuotas($tabla, $item, $item2, $valor, $valor2);
@@ -98,7 +96,7 @@ class ControladorCuotas{
 
 				$datos = array("fecha" => $_POST["eFecha"],
 				           "id_instrumento"=>$_POST["eInstrumento"],
-				           "monto"=>$_POST["eMonto"]);
+				           "valor"=>$_POST["eMonto"]);
 
 				$respuesta = ModeloCuotas::mdlEditarCuota($tabla, $datos);
 
@@ -114,7 +112,7 @@ class ControladorCuotas{
 						  }).then(function(result){
 									if (result.value) {
 
-									window.location = "movimientos";
+									window.location = "cuotas";
 
 									}
 								})
