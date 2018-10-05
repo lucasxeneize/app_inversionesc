@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2018 a las 22:52:29
+-- Tiempo de generación: 05-10-2018 a las 22:24:31
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 7.2.5
 
@@ -42,7 +42,8 @@ CREATE TABLE `administradoras` (
 
 INSERT INTO `administradoras` (`id`, `rut`, `razon_social`, `nombre_fantasia`, `sitio_web`) VALUES
 (32, '96634320-6', 'SCOTIA ADMINISTRADORA GENERAL DE FONDOS CHILE S.A.', 'SCOTIA', 'https://www.scotiabankchile.cl/Personas/Inversiones'),
-(47, '96667040-1', 'SANTANDER ASSET MANAGEMENT S.A. ADMINISTRADORA GENERAL DE FONDOS', 'SANTANDER ASSET', 'https://www.santander.cl/inversiones/index.asp');
+(47, '96667040-1', 'SANTANDER ASSET MANAGEMENT S.A. ADMINISTRADORA GENERAL DE FONDOS', 'SANTANDER ASSET', 'https://www.santander.cl/inversiones/index.asp'),
+(48, '76240079-0', 'ADMINISTRADORA DE FONDOS DE PENSIONES CUPRUM SA', 'CUPRUM', 'www.cuprum.cl');
 
 -- --------------------------------------------------------
 
@@ -66,19 +67,19 @@ CREATE TABLE `instrumentos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
   `id_administradora` int(11) NOT NULL,
-  `serie` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `cuenta` varchar(5) COLLATE utf8_spanish_ci DEFAULT NULL
+  `id_serie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `instrumentos`
 --
 
-INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `serie`, `cuenta`) VALUES
-(6, 'Prioridad', 32, 'C', '001'),
-(7, 'Accionario Nacionales', 32, 'A', NULL),
-(8, 'SANTANDER A', 47, 'A', NULL),
-(9, 'ACCIONES MID CAP CHILE', 47, 'UNIVERSAL', NULL);
+INSERT INTO `instrumentos` (`id`, `nombre`, `id_administradora`, `id_serie`) VALUES
+(6, 'Prioridad', 32, 1),
+(7, 'Accionario Nacionales', 32, 1),
+(8, 'SANTANDER A', 47, 1),
+(9, 'ACCIONES MID CAP CHILE', 47, 1),
+(10, 'FONDO A', 48, 1);
 
 -- --------------------------------------------------------
 
@@ -114,6 +115,14 @@ CREATE TABLE `series` (
   `nombre` varchar(25) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `series`
+--
+
+INSERT INTO `series` (`id`, `nombre`) VALUES
+(1, 'UNIVERSAL'),
+(2, 'A');
+
 -- --------------------------------------------------------
 
 --
@@ -137,8 +146,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `password`, `perfil`, `foto`, `estado`, `ultimo_login`, `fecha`) VALUES
-(1, 'Administrador', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', 'vistas/img/usuarios/admin/191.jpg', 1, '2018-09-03 14:26:09', '2018-09-03 19:26:09'),
-(57, 'Juan Fernando Urrego', 'juan', '$2a$07$asxx54ahjppf45sd87a5auwRi.z6UsW7kVIpm0CUEuCpmsvT2sG6O', 'Vendedor', 'vistas/img/usuarios/juan/461.jpg', 1, '2017-12-21 12:07:24', '2017-12-21 17:07:24'),
+(1, 'Administrador', 'admin', '$2a$07$asxx54ahjppf45sd87a5auXBm1Vr2M1NV5t/zNQtGHGpS5fFirrbG', 'Administrador', 'vistas/img/usuarios/admin/191.jpg', 1, '2018-10-05 08:21:24', '2018-10-05 13:21:24'),
+(57, 'Juan Fernando Urrego', 'juan', '$2a$07$asxx54ahjppf45sd87a5auwRi.z6UsW7kVIpm0CUEuCpmsvT2sG6O', 'Vendedor', 'vistas/img/usuarios/juan/461.jpg', 1, '2017-12-21 12:07:24', '2018-09-27 18:54:59'),
 (58, 'Julio Gómez', 'julio', '$2a$07$asxx54ahjppf45sd87a5auQhldmFjGsrgUipGlmQgDAcqevQZSAAC', 'Especial', 'vistas/img/usuarios/julio/100.png', 1, '2017-12-21 12:07:39', '2017-12-21 17:07:39'),
 (59, 'Ana Gonzalez', 'ana', '$2a$07$asxx54ahjppf45sd87a5auLd2AxYsA/2BbmGKNk2kMChC3oj7V0Ca', 'Vendedor', 'vistas/img/usuarios/ana/260.png', 1, '2017-12-21 12:07:47', '2017-12-21 17:07:47');
 
@@ -165,7 +174,9 @@ ALTER TABLE `cuotas`
 --
 ALTER TABLE `instrumentos`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `instrumentos_administradoras` (`id_administradora`);
+  ADD KEY `instrumentos_administradoras` (`id_administradora`),
+  ADD KEY `id_serie` (`id_serie`),
+  ADD KEY `id_serie_2` (`id_serie`);
 
 --
 -- Indices de la tabla `movimientos`
@@ -195,7 +206,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `administradoras`
 --
 ALTER TABLE `administradoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de la tabla `cuotas`
@@ -207,7 +218,7 @@ ALTER TABLE `cuotas`
 -- AUTO_INCREMENT de la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `movimientos`
@@ -219,7 +230,7 @@ ALTER TABLE `movimientos`
 -- AUTO_INCREMENT de la tabla `series`
 --
 ALTER TABLE `series`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -241,7 +252,8 @@ ALTER TABLE `cuotas`
 -- Filtros para la tabla `instrumentos`
 --
 ALTER TABLE `instrumentos`
-  ADD CONSTRAINT `instrumentos_administradoras` FOREIGN KEY (`id_administradora`) REFERENCES `administradoras` (`id`);
+  ADD CONSTRAINT `instrumentos_administradoras` FOREIGN KEY (`id_administradora`) REFERENCES `administradoras` (`id`),
+  ADD CONSTRAINT `instrumentos_series` FOREIGN KEY (`id_serie`) REFERENCES `series` (`id`);
 
 --
 -- Filtros para la tabla `movimientos`
