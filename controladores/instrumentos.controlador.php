@@ -3,6 +3,24 @@
 class ControladorInstrumentos{
 
 	/*=============================================
+	MOSTRAR
+	=============================================*/
+
+	static public function ctrMostrarInstrumentos($item, $valor){
+
+	echo '<script>console.log("ctrMostrarInstrumentos");</script>';
+
+		$tabla = "instrumentos";
+
+		$respuesta = ModeloInstrumentos::mdlMostrarInstrumentos($tabla, $item, $valor);
+
+		//echo '<script>console.log('.json_encode($respuesta).');</script>';
+
+		return $respuesta;
+	
+	}
+
+	/*=============================================
 	CREAR
 	=============================================*/
 
@@ -71,22 +89,6 @@ class ControladorInstrumentos{
 
 		}
 
-	}
-
-	/*=============================================
-	MOSTRAR
-	=============================================*/
-
-	static public function ctrMostrarInstrumentos($item, $valor){
-
-	echo '<script>console.log("ctrMostrarInstrumentos");</script>';
-
-		$tabla = "instrumentos";
-
-		$respuesta = ModeloInstrumentos::mdlMostrarInstrumentos($tabla, $item, $valor);
-
-		return $respuesta;
-	
 	}
 
 	/*=============================================

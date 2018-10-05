@@ -4,8 +4,8 @@ EDITAR ADMINISTRADORAS
 
 $(".tablas").on("click", ".btnEditarAdministradora", function(){
     
-    /*alert("editar administradora");
-    console.log("editar administradora");*/
+    /*alert("editar administradora");*/
+    /*console.log("editar administradora");*/
 
 	var idAdministradora = $(this).attr("idAdministradora");
 
@@ -13,7 +13,7 @@ $(".tablas").on("click", ".btnEditarAdministradora", function(){
 
 	var datos = new FormData();
 	datos.append("idAdministradora", idAdministradora);
-
+   
 	$.ajax({
 		url: "ajax/administradoras.ajax.php",
 		method: "POST",
@@ -23,19 +23,17 @@ $(".tablas").on("click", ".btnEditarAdministradora", function(){
      	processData: false,
      	dataType:"json",
      	success: function(respuesta){
-
-        console.log(respuesta);
-
+            // alert("administradora JS");
+            // console.log(respuesta);
+            
+            $("#idAdministradora").val(respuesta["id"]);
             $("#editarRut").val(respuesta["rut"]);
      		$("#eRazonSocial").val(respuesta["razon_social"]);
             $("#eNombreFantasia").val(respuesta["nombre_fantasia"]);
             $("#eSitioWeb").val(respuesta["sitio_web"]);
-
-     		$("#idAdministradora").val(respuesta["id"]);
-
      	}
 
-	})
+	});
 
 
 })

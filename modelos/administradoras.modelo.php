@@ -39,6 +39,45 @@ class ModeloAdministradoras{
 
 	static public function mdlMostrarAdministradoras($tabla, $item, $valor){
 
+	//echo '<script>console.log("mdlMostrarAdministradoras");</script>';
+
+		if($item != null){
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item");
+
+			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+
+			$stmt -> execute();
+
+			return $stmt -> fetch();
+
+		}else{
+
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+
+			$stmt -> execute();
+
+			return $stmt -> fetchAll();
+
+		}
+		
+
+		$stmt -> close();
+
+		$stmt = null;
+
+		//return Conexion::query($tabla, $item, $valor);
+
+	}
+
+	/*=============================================
+	MOSTRAR
+	=============================================*/
+
+	static public function mdlBuscarInstrumentos($tabla, $item, $valor){
+
+	echo '<script>console.log("mdlBuscarInstrumentos");</script>';
+
 		return Conexion::query($tabla, $item, $valor);
 
 	}

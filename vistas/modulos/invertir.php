@@ -1,122 +1,159 @@
-    <div class="content-wrapper">
-    
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <section class="content-header">
-    
       <h1>
-    
-        Inversión
-    
+        Invertir
+        <!--small>Preview</small-->
       </h1>
-    
-    <ol class="breadcrumb">
+        <ol class="breadcrumb">
       
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
       
-      <li class="active">Inversión</li>
+      <li class="active">Invertir</li>
     
     </ol>
-    
+
     </section>
 
-    
+    <!-- Main content -->
     <section class="content">
-      
       <div class="row">
-
-        
         <div class="col-md-6">
-          
-          <div class="box box-primary">
-
-            <div class="box-header with-border">
-        
-              <h3 class="box-title">Inversión</h3>
-        
-            </div>
-            
-            <form role="form">
-          
+           <div class="box box-info">
+            <form class="form-horizontal" name="frmInvertir">
               <div class="box-body">
-          
+
+               <!-- SELECT ADMINISTRADORAS -->
                 <div class="form-group">
-          
-                  <label for="exampleInputEmail1">Email address</label>
-          
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-          
+                  <label for="inputEmail3" class="col-sm-2 control-label">Administradora</label>
+                  <div class="col-sm-10">
+                    <select id="slAdministradora" class="form-control" onchange="mostrarAdministradora()">
+                    <option value=0>Seleccione Administradora</option>
+                    <?php
+                      $item = null;
+                      $valor = null;
+
+                      $obj = ControladorAdministradoras::ctrMostrarAdministradoras($item, $valor);
+
+                      foreach ($obj as $key => $value) {
+                        echo ' <option value='.$value["id"].'>'.$value["nombre_fantasia"].'</option>';
+                      }
+                    ?>
+                  </select>
+                  </div>
                 </div>
-          
+
+                <!-- SELECT INSTRUMENTO -->
                 <div class="form-group">
-          
-                  <label for="exampleInputPassword1">Password</label>
-          
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-          
-                </div>
-          
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-
- <!-- SELECT2 EXAMPLE -->
-    
-    
-       <div class="form-group">
-
-          
-          <div class="row">
-          
-            <div class="col-md-6">
-          
-              <div class="form-group">
-          
-                <label>Administradora</label>
-          
-                <select class="form-control select2" style="width: 100%;">
-
-                  <option selected="selected">Alabama</option>
-                  <option>Alaska</option>
-                  <option>California</option>
-                  <option>Delaware</option>
-                  <option>Tennessee</option>
-                  <option>Texas</option>
-                  <option>Washington</option>
-                  <option>Washington3</option>
-                  <option>Washington11</option>
-                  <option>Washington2</option>
-                  <option>Washington</option>
                 
-                </select>
-              </div>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Instrumento</label>
+                
+                  <div class="col-sm-10">
+
+                    <select id="slInstrumentos" class="form-control" onchange="">
+                    
+                    <option value=0>Seleccione Instrumento</option>
+
+                    <?php
+                    
+                      $item = null;
+                    
+                      $valor = null;
+
+                      $obj = ControladorInstrumentos::ctrMostrarInstrumentos($item, $valor);
+
+                      foreach ($obj as $key => $value) {
+
+                        echo ' <option value='.$value["id"].'>'.$value["nombre"].'-'.$value["id_serie"].'</option>';
+                      
+                      }
+                    
+                    ?>
+
+                  </select>
+                
+                  </div>
+                
+                </div>
+
+
+                 <!-- INPUT FECHA -->
+                <div class="form-group">
+
+                  <label for="inputFecha" class="col-sm-2 control-label">Fecha</label>
+
+                  <div class="col-sm-4">
+
+                    <input type="date" class="form-control" id="inputFecha" placeholder="Fecha" onchange="BuscarValorCuota()">
+
+                  </div>
+
+                  <!-- INPUT VALOR CUOTA -->
+                  <label for="inputValor" class="col-sm-2 control-label">Valor cuota</label>
+
+                  <div class="col-sm-4">
+
+                    <input type="text" class="form-control" id="inputValor" placeholder="$ 26.768,90" disabled="true">
+
+                  </div>                  
+
+                </div>
+
+                <div class="form-group">
+
+                <label for="inputMonto" class="col-sm-2 control-label">Monto</label>
+                  <!-- INPUT VALOR MONTO -->
+                  <div class="col-sm-4">
+
+                    <input type="text" class="form-control" id="inputMonto" placeholder="Monto">
+
+                  </div>
+
+                  <!-- INPUT CUOTA -->
+                  <label for="inputCuotas" class="col-sm-2 control-label">Cuota</label>
+
+                  <div class="col-sm-4">
+                  
+                    <input type="text" class="form-control" id="inputCuotas" placeholder="413.9501" disabled>
+                  
+                  </div>
+                
+                </div>
+
+                <!--div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                  <label>
+                  <input type="checkbox"> Remember me
+                  </label>
+                  </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default">Guardar</button>
+                  </div>
+                </div>
+            </div-->
+
+            <div class="modal-footer">
+
+              <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
             </div>
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-          the plugin.
-        </div>
-    
-      <!-- /.box -->
 
-
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
             </form>
+
           </div>
-          <!-- /.box -->
+
+        </div>
+
       </div>
-      <!-- /.row -->
+      <!-- fin row  -->
+
     </section>
     <!-- /.content -->
   </div>

@@ -156,6 +156,7 @@ CUERPO DOCUMENTO
 <script src="vistas/js/instrumentos.js"></script>
 <script src="vistas/js/movimientos.js"></script>
 <script src="vistas/js/cuotas.js"></script>
+<script src="vistas/js/invertir.js"></script>
 
 </body>
 </html>

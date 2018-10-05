@@ -5,6 +5,18 @@ require_once "conexion.php";
 class ModeloInstrumentos{
 
 	/*=============================================
+	MOSTRAR
+	=============================================*/
+
+	static public function mdlMostrarInstrumentos($tabla, $item, $valor){
+
+		return Conexion::query($tabla, $item, $valor);
+
+		//return Conexion::queryTablasMultiples("SELECT i.*, (SELECT s.nombre FROM series s WHERE s.id=i.id_serie) AS nombre_serie FROM instrumentos i");
+		//return Conexion::queryTablasMultiples("SELECT nombre FROM instrumentos");
+	}
+
+	/*=============================================
 	CREAR CATEGORIA
 	=============================================*/
 
@@ -40,15 +52,6 @@ class ModeloInstrumentos{
 
 	}
 
-	/*=============================================
-	MOSTRAR
-	=============================================*/
-
-	static public function mdlMostrarInstrumentos($tabla, $item, $valor){
-
-		return Conexion::query($tabla, $item, $valor);
-		
-	}
 
 	/*=============================================
 	EDITAR

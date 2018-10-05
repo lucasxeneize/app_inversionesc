@@ -239,6 +239,8 @@ class ControladorUsuarios{
 
 	static public function ctrMostrarUsuarios($item, $valor){
 
+		//echo '<script>console.log("ddddctrMostrarUsuarios");</script>';
+
 		$tabla = "usuarios";
 
 		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
@@ -251,6 +253,7 @@ class ControladorUsuarios{
 	=============================================*/
 
 	static public function ctrEditarUsuario(){
+
 
 		if(isset($_POST["editarUsuario"])){
 

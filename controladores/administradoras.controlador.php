@@ -78,9 +78,23 @@ class ControladorAdministradoras{
 
 	static public function ctrMostrarAdministradoras($item, $valor){
 
-		//echo '<script>console.log("ctrMostrarAdministradoras");</script>';
-
 		$tabla = "administradoras";
+
+		$respuesta = ModeloAdministradoras::mdlMostrarAdministradoras($tabla, $item, $valor);
+
+		return $respuesta;
+	
+	}
+
+	/*=============================================
+	BUSCAR INSTRUMENTOS ADMINISTRADORAS
+	=============================================*/
+
+	static public function ctrBuscarInstrumentos($item, $valor){
+
+		//echo '<script>console.log("ctrBuscarInstrumentos");</script>';
+
+		$tabla = "instrumentos";
 
 		$respuesta = ModeloAdministradoras::mdlMostrarAdministradoras($tabla, $item, $valor);
 
@@ -95,7 +109,8 @@ class ControladorAdministradoras{
 	static public function ctrEditarAdministradora(){
 
 		echo '<script>console.log("ctrEditarAdministradora");</script>';
-
+		//echo '<script>console.log("POST idAdministradora"'.$_POST["eRazonSocial"].');</script>';
+		
 		if(isset($_POST["eRazonSocial"])){
 
 			echo '<script>console.log("rz:'.$_POST["eRazonSocial"].'");</script>';

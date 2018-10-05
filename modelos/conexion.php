@@ -43,4 +43,20 @@ class Conexion{
 
 	}
 
+	static public function queryTablasMultiples($query){
+
+		echo '<script>console.log("queryTablasMultiples");</script>';
+
+		$stmt = Conexion::conectar()->prepare("$query");
+
+		$stmt -> execute();
+
+		return $stmt -> fetch();
+
+		$stmt -> close();
+
+		$stmt = null;
+
+	}
+
 }

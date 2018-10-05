@@ -2,6 +2,7 @@
 
 require_once "../controladores/usuarios.controlador.php";
 require_once "../modelos/usuarios.modelo.php";
+require "../controladores/util.controlador.php";
 
 class AjaxUsuarios{
 
@@ -67,7 +68,7 @@ class AjaxUsuarios{
 EDITAR USUARIO
 =============================================*/
 if(isset($_POST["idUsuario"])){
-
+	
 	$editar = new AjaxUsuarios();
 	$editar -> idUsuario = $_POST["idUsuario"];
 	$editar -> ajaxEditarUsuario();
